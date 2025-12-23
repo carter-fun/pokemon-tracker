@@ -2,26 +2,246 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap');
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-deep: #0a0a0f;
+  --bg-card: #12121a;
+  --accent-primary: #ff6b35;
+  --accent-secondary: #00d4aa;
+  --accent-tertiary: #7c3aed;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Lexend', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: var(--bg-deep);
+  color: #e4e4e7;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Clean Dark Background */
+.pokemon-bg {
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(124, 58, 237, 0.15), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(255, 107, 53, 0.08), transparent),
+    var(--bg-deep);
+  min-height: 100vh;
+}
+
+.pokeball-pattern {
+  background-image: none;
+}
+
+/* Card Styles - Clean and Modern */
+.glass-card {
+  background: linear-gradient(145deg, #18181f 0%, #111116 100%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.glass-card-strong {
+  background: linear-gradient(145deg, #1a1a22 0%, #111116 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.glass-card-light {
+  background: linear-gradient(145deg, #1f1f28 0%, #16161c 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-button {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.2s ease;
+}
+
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.glass-input {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.glass-input:focus {
+  background: rgba(0, 0, 0, 0.4);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.15);
+  outline: none;
+}
+
+.glass-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Collected Card Accent */
+.collected-glow {
+  box-shadow: 
+    0 0 0 2px rgba(0, 212, 170, 0.4),
+    0 4px 20px rgba(0, 212, 170, 0.2);
+}
+
+/* Subtle reflection on cards */
+.glass-reflection {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-reflection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.03) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+}
+
+.glass-reflection:hover::before {
+  left: 150%;
+}
+
+.frosted-overlay {
+  display: none;
+}
+
+/* Pokemon silhouettes - more subtle */
+.pokemon-silhouette {
+  position: fixed;
+  opacity: 0.015;
+  pointer-events: none;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes floatReverse {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(15px); }
+}
+
+.float-animation {
+  animation: float 8s ease-in-out infinite;
+}
+
+.float-animation-reverse {
+  animation: floatReverse 10s ease-in-out infinite;
+}
+
+/* Gradient orbs - very subtle */
+.gradient-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Card hover */
+.card-hover {
+  transition: all 0.25s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Progress bar */
+.progress-fill {
+  background: linear-gradient(90deg, var(--accent-secondary) 0%, #10b981 100%);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Text styles */
+.text-gradient {
+  background: linear-gradient(135deg, #fff 0%, var(--accent-primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.neon-text {
+  text-shadow: none;
+}
+
+/* Hide scrollbar */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Accent highlights */
+.accent-line {
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary));
+}
+
+/* Stats number style */
+.stat-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Tag/pill styles */
+.tag-active {
+  background: var(--accent-primary);
+  color: white;
+  border-color: var(--accent-primary);
+}
+
+/* Set card collected indicator */
+.set-collected {
+  border-left: 3px solid var(--accent-secondary);
 }
